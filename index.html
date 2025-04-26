@@ -1,4 +1,4 @@
-<!DOCTYPE html<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
@@ -18,8 +18,8 @@
       max-width: 90%;
       max-height: 90vh;
       cursor: pointer;
-      border-radius: 0;
-      box-shadow: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
   </style>
 </head>
@@ -28,84 +28,6 @@
 
   <script>
     const images = ["1.GIF", "2.GIF", "3.GIF", "4.GIF", "5.GIF", "6.GIF"];
-    let index = 0;
-
-    document.getElementById("gallery").addEventListener("click", () => {
-      index = (index + 1) % images.length;
-      document.getElementById("gallery").src = images[index];
-    });
-  </script>
-</body>
-</html>
-
-<html lang="zh-TW">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>叮咚!電子卡片來了</title>
-  <style>
-    body {
-      margin: 0;
-      background-color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      font-family: "Noto Sans TC", sans-serif;
-    }
-    img {
-      max-width: 90%;
-      max-height: 90vh;
-      cursor: pointer;
-      border-radius: 0;
-      box-shadow: none;
-    }
-  </style>
-</head>
-<body>
-  <img id="gallery" src="1.GIF" alt="是卡片" />
-
-  <script>
-    const images = ["1.GIF", "2.GIF", "3.GIF", "4.GIF", "5.GIF", "6.GIF"]<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>叮咚!電子卡片來了</title>
-  <style>
-    body {
-      margin: 0;
-      background-color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      font-family: "Noto Sans TC", sans-serif;
-    }
-    img {
-      max-width: 90%;
-      max-height: 90vh;
-      cursor: pointer;
-      border-radius: 0;
-      box-shadow: none;
-    }
-  </style>
-</head>
-<body>
-  <img id="gallery" src="1.GIF" alt="是卡片" />
-
-  <script>
-    const images = ["1.GIF", "2.GIF", "3.GIF", "4.GIF", "5.GIF", "6.GIF"];
-    let index = 0;
-
-    document.getElementById("gallery").addEventListener("click", () => {
-      index = (index + 1) % images.length;
-      document.getElementById("gallery").src = images[index];
-    });
-  </script>
-</body>
-</html>
-
     let index = 0;
 
     document.getElementById("gallery").addEventListener("click", () => {
