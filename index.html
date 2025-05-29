@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>叮咚!小驚喜來了</title>
+  <title>叮咚!小驚喜來啦～</title>
   <style>
     body {
       margin: 0;
@@ -15,74 +15,65 @@
       font-family: "Noto Sans TC", sans-serif;
     }
     img {
-      max-width: 90%;
+      max-width: 80%;
       max-height: 80vh;
       cursor: pointer;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      display: none;
     }
-    #password-screen {
-      position: fixed;
-      inset: 0;
-      background: white;
+    #passwordContainer {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      z-index: 9999;
     }
-    #password-screen input {
-      padding: 8px;
-      font-size: 1rem;
-    }
-    #password-screen button {
+    input {
+      padding: 10px;
+      font-size: 16px;
       margin-top: 10px;
-      padding: 8px 16px;
-      font-size: 1rem;
     }
-    #error-msg {
-      color: red;
+    button {
+      padding: 10px 20px;
       margin-top: 10px;
+      font-size: 16px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div id="password-screen">
-    <p style="font-size: 1.2rem;">猜對密碼才讓你進🙈</p>
-    <input type="password" id="password-input" placeholder="輸入密碼" />
-    <button onclick="checkPassword()">確定</button>
-    <p id="error-msg"></p>
+
+  <div id="passwordContainer">
+    <h2>打對密碼才讓你看🙈🙈</h2>
+    <input type="password" id="passwordInput" placeholder="輸入密碼">
+    <button onclick="checkPassword()">進入</button>
   </div>
 
-  <div id="main-content" style="display: none;">
-    <img id="gallery" src="1.GIF" alt="是卡片" />
-  </div>
+  <img id="gallery" src="1.GIF" alt="是卡片" />
 
   <script>
-    function checkPassword() {
-      const correctPassword = "9284";
-      const input = document.getElementById("password-input").value;
-      const errorMsg = document.getElementById("error-msg");
-
-      if (input === correctPassword) {
-        document.getElementById("password-screen").style.display = "none";
-        document.getElementById("main-content").style.display = "flex";
-      } else {
-        errorMsg.textContent = "密碼錯誤，請再試一次";
-      }
-    }
-
     const images = ["1.GIF", "2.GIF", "3.GIF", "4.GIF", "5.GIF", "6.GIF"];
     let index = 0;
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const gallery = document.getElementById("gallery");
-      gallery.addEventListener("click", () => {
-        index = (index + 1) % images.length;
-        gallery.src = images[index];
-      });
-    });
+    function checkPassword() {
+      const input = document.getElementById("passwordInput").value;
+      if (input === "9284") {
+        document.getElementById("passwordContainer").style.display = "none";
+        const gallery = document.getElementById("gallery");
+        gallery.style.display = "block";
+
+        gallery.addEventListener("click", () => {
+          index = (index + 1) % images.length;
+          gallery.src = images[index] + "?t=" + new Date().getTime();
+        });
+      } else {
+        alert("猜錯啦～");
+      }
+    }
   </script>
+
 </body>
 </html>
-
