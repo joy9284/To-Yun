@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>叮咚!小驚喜來啦～</title>
+  <title>叮咚!是驚喜！</title>
   <style>
     body {
       margin: 0;
@@ -13,67 +13,77 @@
       align-items: center;
       height: 100vh;
       font-family: "Noto Sans TC", sans-serif;
+      overflow: hidden;
     }
-    img {
-      max-width: 80%;
-      max-height: 80vh;
+    #gallery {
+      width: 90%;
+      height: 90%;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
       cursor: pointer;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      display: none;
-    }
-    #passwordContainer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    input {
-      padding: 10px;
-      font-size: 16px;
-      margin-top: 10px;
-    }
-    button {
-      padding: 10px 20px;
-      margin-top: 10px;
-      font-size: 16px;
-      background-color: #333;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
-
-  <div id="passwordContainer">
-    <h2>打對密碼才讓你看🙈🙈</h2>
-    <input type="password" id="passwordInput" placeholder="輸入密碼">
-    <button onclick="checkPassword()">進入</button>
-  </div>
-
-  <img id="gallery" src="1.GIF" alt="是卡片" />
+  <div id="gallery"></div>
 
   <script>
     const images = ["1.GIF", "2.GIF", "3.GIF", "4.GIF", "5.GIF", "6.GIF"];
     let index = 0;
+    const gallery = document.getElementById("gallery");
 
+    // 預先加載所有圖片
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+
+    // 初始載入第一張
+    gallery.style.backgroundImage = `url('${images[index]}')`;
+
+    gallery.addEventListener("click", () => {
+      index = (index + 1) % images.length;
+      gallery.style.backgroundImage = `url('${images[index]}')`;
+    });
+  </script>
+</body>
+<body>
+  <div id="password-screen" style="position: fixed; inset: 0; background: white; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999;">
+    <p style="font-size: 1.2rem;">答對密碼才讓你看🙈🙈</p>
+    <input type="password" id="password-input" placeholder="輸入密碼" style="padding: 8px; font-size: 1rem;" />
+    <button onclick="checkPassword()" style="margin-top: 10px; padding: 8px 16px;">確定</button>
+    <p id="error-msg" style="color: red; margin-top: 10px;"></p>
+  </div>
+
+  <div id="main-content" style="display: none;">
+    <!-- 你原本的畫畫網站內容放在這裡 -->
+    <img id="gallery" src="1.GIF" alt="是卡片" />
+    <script>
+      const images = ["1.GIF", "2.GIF", "3.GIF", "4.GIF", "5.GIF", "6.GIF"];
+      let index = 0;
+      document.getElementById("gallery").addEventListener("click", () => {
+        index = (index + 1) % images.length;
+        document.getElementById("gallery").src = images[index];
+      });
+    </script>
+  </div>
+
+  <script>
     function checkPassword() {
-      const input = document.getElementById("passwordInput").value;
-      if (input === "9284") {
-        document.getElementById("passwordContainer").style.display = "none";
-        const gallery = document.getElementById("gallery");
-        gallery.style.display = "block";
+      const correctPassword = 9284
+      const input = document.getElementById("password-input").value;
+      const errorMsg = document.getElementById("error-msg");
 
-        gallery.addEventListener("click", () => {
-          index = (index + 1) % images.length;
-          gallery.src = images[index] + "?t=" + new Date().getTime();
-        });
+      if (input === correctPassword) {
+        document.getElementById("password-screen").style.display = "none";
+        document.getElementById("main-content").style.display = "block";
       } else {
-        alert("猜錯啦～");
+        errorMsg.textContent = "好笨！猜錯啦";
       }
     }
   </script>
-
 </body>
 </html>
