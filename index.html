@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>叮咚!電子卡片來了</title>
+  <title>叮咚！是驚喜！</title>
   <style>
     body {
       margin: 0;
-      background-color: #fff7f0;
+      background-color: #ffffff;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -15,82 +15,77 @@
       font-family: "Noto Sans TC", sans-serif;
       flex-direction: column;
     }
-
-    #passwordContainer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    input {
-      padding: 10px;
-      font-size: 16px;
-      margin-top: 10px;
-    }
-
-    button {
-      padding: 10px 20px;
-      margin-top: 10px;
-      font-size: 16px;
-      background-color: #ff8da2;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    #message {
-      font-size: 20px;
-      color: #ff4d6d;
-      margin-bottom: 20px;
-    }
-
-    img {
+    #gallery {
       max-width: 80%;
       max-height: 80vh;
       cursor: pointer;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       display: none;
+    }
+    #message {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    #passwordInput {
+      font-size: 18px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      outline: none;
+      margin-bottom: 10px;
+    }
+    #submitBtn {
+      padding: 6px 12px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: none;
+      background-color: #ffffff;
+      color: white;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <div id="passwordContainer">
-    <div id="message">答對密碼才讓你看🙈</div>
-    <input type="password" id="passwordInput" placeholder="輸入密碼">
-    <button onclick="checkPassword()">進入</button>
-  </div>
+  <div id="message">答對密碼才讓你看🙈</div>
+  <input type="password" id="passwordInput" placeholder="輸入密碼" />
+  <button id="submitBtn">確定</button>
 
   <img id="gallery" src="" alt="是卡片" onclick="nextImage()" />
 
+  <!-- 預載入圖片（不會顯示出來） -->
+  <div style="display: none;">
+    <img src="1.GIF" />
+    <img src="2.GIF" />
+    <img src="3.GIF" />
+    <img src="4.GIF" />
+    <img src="5.GIF" />
+    <img src="6.GIF" />
+  </div>
+
   <script>
-    const password = "9284";
     const images = ["1.GIF", "2.GIF", "3.GIF", "4.GIF", "5.GIF", "6.GIF"];
     let index = 0;
 
-    function checkPassword() {
+    document.getElementById("submitBtn").addEventListener("click", () => {
       const input = document.getElementById("passwordInput").value;
-      const message = document.getElementById("message");
-      if (input === password) {
-        document.getElementById("passwordContainer").style.display = "none";
-        const gallery = document.getElementById("gallery");
-        gallery.style.display = "block";
-        gallery.src = images[index] + "?t=" + new Date().getTime();
+      if (input === "9284") {
+        document.getElementById("message").style.display = "none";
+        document.getElementById("passwordInput").style.display = "none";
+        document.getElementById("submitBtn").style.display = "none";
+        document.getElementById("gallery").style.display = "block";
+        document.getElementById("gallery").src = images[index];
       } else {
-        message.textContent = "好笨！猜錯啦～";
+        document.getElementById("message").textContent = "好笨！猜錯啦～";
       }
-    }
+    });
 
     function nextImage() {
       index = (index + 1) % images.length;
-      const gallery = document.getElementById("gallery");
-      gallery.src = images[index] + "?t=" + new Date().getTime();
+      document.getElementById("gallery").src = images[index];
     }
   </script>
-
 </body>
 </html>
-
-    
